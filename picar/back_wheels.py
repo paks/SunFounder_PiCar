@@ -96,6 +96,20 @@ class Back_Wheels(object):
 		if self._DEBUG:
 			print self._DEBUG_INFO, 'Running forward'
 
+	def turn_left_backward(self):
+		''' Move both wheels forward '''
+		self.left_wheel.stop()
+		self.right_wheel.backward()
+		if self._DEBUG:
+			print self._DEBUG_INFO, 'Running forward'
+
+	def turn_right_backward(self):
+		''' Move both wheels forward '''
+		self.left_wheel.backward()
+		self.right_wheel.stop()
+		if self._DEBUG:
+			print self._DEBUG_INFO, 'Running forward'
+
 	@property
 	def speed(self, speed):
 		return self._speed
