@@ -12,17 +12,19 @@
 **********************************************************************
 '''
 
-from SunFounder_TB6612 import TB6612
+from Kitiara_L298N import L298N
 from SunFounder_PCA9685 import PCA9685
 import filedb
 
 class Back_Wheels(object):
 	''' Back wheels control class '''
-	Motor_A = 17
-	Motor_B = 27
+	Motor_A_a = 5
+	Motor_A_b = 6
+	Motor_B_a = 13
+	Motor_B_b = 19
 
-	PWM_A = 4
-	PWM_B = 5
+	PWM_A = 0
+	PWM_B = 3
 
 	_DEBUG = False
 	_DEBUG_INFO = 'DEBUG "back_wheels.py":'
@@ -37,8 +39,8 @@ class Back_Wheels(object):
 		self.forward_A = int(self.db.get('forward_A', default_value=1))
 		self.forward_B = int(self.db.get('forward_B', default_value=1))
 
-		self.left_wheel = TB6612.Motor(self.Motor_A, offset=self.forward_A)
-		self.right_wheel = TB6612.Motor(self.Motor_B, offset=self.forward_B)
+		self.left_wheel = L298N.Motor(self.Motor_A_a, self.Motor_A_b, offset=self.forward_A)
+		self.right_wheel = L298N.Motor(self.Motor_B_a, self.Motor_B_b, offset=self.forward_B)
 
 		self.pwm = PCA9685.PWM(bus_number=bus_number)
 		def _set_a_pwm(value):
@@ -56,8 +58,8 @@ class Back_Wheels(object):
 
 		self.debug = debug
 		if self._DEBUG:
-			print self._DEBUG_INFO, 'Set left wheel to #%d, PWM channel to %d' % (self.Motor_A, self.PWM_A)
-			print self._DEBUG_INFO, 'Set right wheel to #%d, PWM channel to %d' % (self.Motor_B, self.PWM_B)
+			print self._DEBUG_INFO, 'Set left wheel to #%d : #%d, PWM channel to %d' % (self.Motor_A_a, self.Motor_A_b, self.PWM_A)
+			print self._DEBUG_INFO, 'Set right wheel to #%d: #%d, PWM channel to %d' % (self.Motor_B_a, self.Motor_B_b, self.PWM_B)
 
 	def forward(self):
 		''' Move both wheels forward '''
