@@ -4,3 +4,6 @@
 [submodule "picar/SunFounder_TB6612"]
 	path = picar/SunFounder_TB6612
 	url = https://github.com/sunfounder/SunFounder_TB6612.git
+[submodule "picar/Kitiara_L298N"]
+	path = picar/Kitiara_L298N
+	url = https://github.com/paks/Kitiara_L298N.git
